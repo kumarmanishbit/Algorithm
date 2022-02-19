@@ -7,6 +7,8 @@ import java.util.Map;
 
 /***
  * Count Distinct Rows in a Binary Matrix
+ * TC: O(m * n)
+ * SC: O(m * n)
  */
 public class DistinctRows {
 
@@ -17,6 +19,7 @@ public class DistinctRows {
     }
 
     private static void findDuplicate(int[][] matrix) {
+        // Get the empty node of the trie.
         Node root = new Node();
 
         int count = 0;
@@ -52,6 +55,7 @@ public class DistinctRows {
 
     static class Node {
         Map<Integer, Node> child;
+        // isEnd is not required here, as size of all the element is same.
         boolean isEnd;
 
         Node() {
