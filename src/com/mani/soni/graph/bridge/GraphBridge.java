@@ -4,8 +4,9 @@ import java.util.*;
 
 /**
  * An edge in a graph between vertices say  and  is called a Bridge, if after removing it,
- * there will be no path left between  and . It's definition is very similar to that of Articulation Points.
- * Just like them it also represents vulnerabilities in the given network.
+ * there will be no path left between  and .
+ * Its definition is very similar to that of Articulation Points.
+ * Just like them, it also represents vulnerabilities in the given network.
  *
  */
 public class GraphBridge {

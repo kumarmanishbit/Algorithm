@@ -1,6 +1,6 @@
 package com.mani.soni.graph;
 
-import com.mani.soni.datastructure.list.Graph;
+import com.mani.soni.graph.datastructure.list.Graph;
 
 public class GraphListTest {
 

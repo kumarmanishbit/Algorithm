@@ -3,7 +3,7 @@ package com.mani.soni.graph.articulationpoint;
 import java.util.*;
 
 /**
- * Articulation point or cut vertices.
+ * Articulation point or cut vertex.
  * A vertex in an undirected connected graph is an articulation point (or cut vertex)
  * if removing it (and edges through it) disconnects the graph.
  *
