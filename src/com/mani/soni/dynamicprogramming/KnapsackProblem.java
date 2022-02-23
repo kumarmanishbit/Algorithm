@@ -11,6 +11,7 @@ public class KnapsackProblem {
 
         System.out.println(findMaxValue(knapsack, value, weight, 0));
         System.out.println(findMaxValueMemoization(value, weight, knapsack));
+        System.out.println(findMaxValueTabulation(value, weight, knapsack));
 
     }
 
@@ -105,14 +106,89 @@ public class KnapsackProblem {
     }
 
     /**
-     * dp[i][c] = max (dp[i-1][c], profits[i] + dp[i-1][c-weights[i]]) 
+     *
+     * dp[i][c] = max (dp[i-1][c], profits[i] + dp[i-1][c-weights[i]])
+     *
+     * TC: O(N * C)
+     * SC: O(N * C)
      * @param value
      * @param weight
      * @param knapsack
      * @return
      */
     private static int findMaxValueTabulation(int[] value, int[] weight, int knapsack) {
-        return 0;
+
+        // basic checks
+        if (knapsack <= 0 || value.length == 0 || weight.length != value.length)
+            return 0;
+
+        // dp[i][c] will represent the maximum knapsack profit for capacity ‘c’
+        // calculated from the first ‘i’ items
+        int dp[][] = new int[value.length+ 1][knapsack + 1];
+
+        System.out.println(dp.length);
+
+        for (int i = 0; i < value.length + 1; i++) {
+            dp[i][0] = 0;
+        }
+
+        for (int i = 0; i < knapsack + 1; i++) {
+            dp[0][i] = 0;
+        }
+
+        /**
+         *
+         * for each item at index ‘i’ (0 <= i < items.length) and capacity ‘c’ (0 <= c <= capacity), we have two options:
+         *
+         * Exclude the item at index ‘i’. In this case, we will take whatever profit we get from the sub-array excluding
+         * this item => dp[i-1][c]
+         * Include the item at index ‘i’ if its weight is not more than the capacity. In this case, we include its profit
+         * plus whatever profit we get from the remaining capacity and from remaining
+         * items => profits[i] + dp[i-1][c-weights[i]]
+         *
+         * dp[i][c] = max (dp[i-1][c], profits[i] + dp[i-1][c-weights[i]])
+         *
+         */
+        // process all sub-arrays for all the capacities
+        for (int i = 1; i < value.length + 1; i++) {
+            for (int j = 1; j < knapsack + 1; j++) {
+                // build solution sequentially.
+                // include the item, if it is not more than the capacity
+                if(weight[i - 1] <= j) {
+                    dp[i][j] = value[i - 1] + dp[i - 1][j - weight[i - 1]];
+                }
+                // take maximum
+                // exclude the item dp[i - 1][j]
+                dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
+            }
+        }
+
+        printSelectedElements(dp, weight, value, knapsack);
+
+        // maximum profit will be at the bottom-right corner.
+        return dp[value.length][knapsack];
+    }
+
+    private static void printSelectedElements(int dp[][], int[] weights, int[] profits, int capacity){
+        System.out.print("Selected weights:");
+        int totalProfit = dp[weights.length][capacity];
+
+        /**
+         * As you remember, at every step, we had two options: include an item or skip it.
+         * If we skip an item, then we take the profit from the remaining items (i.e., from the cell right above it);
+         * if we include the item, then we jump to the remaining profit to find more items.
+         */
+        for(int i = weights.length; i > 0; i--) {
+            if(totalProfit != dp[i - 1][capacity]) {
+                System.out.print(" " + weights[i - 1]);
+                capacity -= weights[i - 1];
+                totalProfit -= profits[i - 1];
+            }
+        }
+
+        if(totalProfit != 0)
+            System.out.print(" " + weights[0]);
+        System.out.println("");
     }
 
 }
