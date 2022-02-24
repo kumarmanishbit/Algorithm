@@ -50,6 +50,7 @@ public class UnboundedKnapsack {
                     dp[i][j] = profits[i - 1] + dp[i][j - weight[i - 1]];
                 }
 
+                // Remember If we skip it, then we take the item from the cell right above it
                 dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
             }
         }
