@@ -7,8 +7,26 @@ package com.mani.soni.dynamicprogramming;
  * target ‘S’.
  */
 public class NoOfWaysForSymbol {
+
+    private static int count = 0;
     public static void main(String[] args) {
         int[] arr = {1, 1, 2, 3};
-        int S=1;
+        int sum=1;
+
+        noOfWays(arr, sum, 0);
+    }
+
+    private static int noOfWays(int[] arr, int sum, int index) {
+
+        arr[index] = (-1) * arr[index];
+        if(noOfWays(arr, sum, index) == sum) {
+            count++;
+        }
+        arr[index] = (-1) * arr[index];
+        if(noOfWays(arr, sum, index) == sum) {
+            count++;
+        }
+
+        return sum;
     }
 }
