@@ -23,6 +23,7 @@ public class MinimumJumpsToReachEnd {
 
         System.out.println(jumpGreedy(arr));
         System.out.println(jumpGreedy2(arr));
+        System.out.println(countMinJumps(arr));
 
 //        makeJumps(arr, 0, 0);
 
@@ -150,5 +151,38 @@ public class MinimumJumpsToReachEnd {
                 makeJumps(arr, i, step + 1);
             }
         }
+    }
+
+    /**
+     * Recursive solution
+     *
+     * TC: O(2n)
+     * SC: O(n)
+     *
+     * @param jumps
+     * @return
+     */
+    public static int countMinJumps(int[] jumps) {
+        return countMinJumpsRecursive(jumps, 0);
+    }
+
+    private static int countMinJumpsRecursive(int[] jumps, int currentIndex) {
+        // if we have reached the last index, we don't need any more jumps
+        if( currentIndex == jumps.length - 1)
+            return 0;
+
+        if (jumps[currentIndex] == 0)
+            return Integer.MAX_VALUE;
+
+        int totalJumps = Integer.MAX_VALUE;
+        int start = currentIndex + 1;
+        int end = currentIndex + jumps[currentIndex];
+        while(start < jumps.length && start <= end) {
+            // jump one step and recurse for the remaining array
+            int minJumps = countMinJumpsRecursive(jumps, start++);
+            if(minJumps != Integer.MAX_VALUE)
+                totalJumps = Math.min(totalJumps, minJumps + 1);
+        }
+        return totalJumps;
     }
 }
