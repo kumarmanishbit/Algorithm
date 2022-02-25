@@ -121,6 +121,8 @@ public class MinimumJumpsToReachEnd {
         Arrays.fill(dp, Integer.MAX_VALUE);
         dp[0] = 0;
 
+        // dp[end] = Math.min(dp[end], dp[start]+1);
+        // This is like LIC problem. We start looking backward.
         for(int i=0 ; i < nums.length; ++i) {
             for(int j = 0; j < i; j++) {
 
