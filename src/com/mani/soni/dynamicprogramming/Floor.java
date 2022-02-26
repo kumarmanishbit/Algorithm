@@ -4,7 +4,7 @@ public class Floor {
     public static void main(String[] args) {
         int[] arr = {1, 3,  5, 6, 10, 23, 25, 100, 201};
 
-        int element = 11;
+        int element = 99;
         System.out.println(arr[floor(arr, 0 , arr.length - 1, element)]);
     }
 
