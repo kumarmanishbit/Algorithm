@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class MaxSumSubsetDifference {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 9};
+        int[] arr = {1, 5, 3, 2, 4};
         int value = 0;
 
         findMaxSubSetDiff(arr, value);
