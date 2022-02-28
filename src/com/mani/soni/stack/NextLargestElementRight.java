@@ -2,7 +2,7 @@ package com.mani.soni.stack;
 
 import java.util.Stack;
 
-public class NextLargestElement {
+public class NextLargestElementRight {
 
     public static void main(String[] args) {
         int[] arr = {4, 6, 3, 2, 8, 1, 2};
