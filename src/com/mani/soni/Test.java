@@ -1,8 +1,6 @@
 package com.mani.soni;
 
-import com.mani.soni.disjoint.UnionFind;
-
-import java.util.Arrays;
+import java.util.*;
 
 public class Test {
 
@@ -10,29 +8,75 @@ public class Test {
 
     public static void main(String[] args) {
 
-        for (int i = 0, len = memo.length; i < len; i++)
-            Arrays.fill(memo[i], -1);
-
-        String s1 = "ABCDGH";
-        String s2 = "AEDFHR";
-
-        System.out.println(lcs(s1, s2, 0, 0 ));
+       // System.out.println(solution(new int[]{180, -50, -25, -25}, new String[]{"2020-01-01", "2020-01-01", "2020-01-01", "2020-01-31"}));
+        merge();
     }
 
-    private static int lcs(String s1, String s2, int i, int j) {
+    public static void merge() {
 
-        if(i > s1.length() - 1 || j > s2.length() - 1) {
-            return 0;
+
+        int[] size = {1, 3};
+        int position[] = {2, 6};
+        int start = 1;
+        int end = 5;
+
+//        int[] size = {2, 1};
+//        int position[] = {5, 1};
+//        int start = 2;
+//        int end = 6;
+
+        List<Range> rangeList = new ArrayList<>();
+
+        for (int i = 0; i < position.length; i++) {
+             rangeList.add(new Range(position[i] - size[i], position[i] + size[i]));
         }
 
-        if(s1.charAt(i) == s2.charAt(j)) {
-            memo[i][j] = lcs(s1, s2, i + 1, j + 1) + 1;
-            return memo[i][j];
+        mergeRanges(rangeList);
+
+        for(Range range : rangeList) {
+            if(range.getLeftEnd() <= start && range.getRightEnd() >= end) {
+                System.out.println("true");
+                break;
+            }
         }
-
-        memo[i][j] =  Math.max(lcs(s1, s2, i + 1, j), lcs(s1, s2, i, j + 1));
-
-        return memo[i][j];
     }
 
+    public static List<Range> mergeRanges(List<Range> sortedCraneRanges) {
+
+        Collections.sort(sortedCraneRanges, Comparator.comparingInt(Range::getLeftEnd));
+
+        List<Range> mergedRanges = new ArrayList<>();
+        mergedRanges.add(sortedCraneRanges.get(0));
+        for (Range currentRange : sortedCraneRanges) {
+            Range lastRange = mergedRanges.get(mergedRanges.size() - 1);
+
+            if (currentRange.getLeftEnd() <= lastRange.getRightEnd()) {
+                lastRange.setRightEnd(Math.max(lastRange.getRightEnd(), currentRange.getRightEnd()));
+            } else {
+                mergedRanges.add(currentRange);
+            }
+        }
+        return mergedRanges;
+    }
+
+    static class Range {
+        private int leftEnd;
+        private int rightEnd;
+        public Range(int startTime, int endTime) {
+            this.leftEnd = startTime;
+            this.rightEnd = endTime;
+        }
+        public int getLeftEnd() {
+            return leftEnd;
+        }
+        public void setLeftEnd(int leftEnd) {
+            this.leftEnd = leftEnd;
+        }
+        public int getRightEnd() {
+            return rightEnd;
+        }
+        public void setRightEnd(int rightEnd) {
+            this.rightEnd = rightEnd;
+        }
+    }
 }
