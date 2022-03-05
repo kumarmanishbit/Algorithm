@@ -43,3 +43,11 @@ public class LongestSubStringWithKUniqueCharacter {
         System.out.println(maxUnique);
     }
 }
+
+class Meeting implements Comparable<Meeting> {
+
+    @Override
+    public int compareTo(Meeting o) {
+        return 0;
+    }
+}
