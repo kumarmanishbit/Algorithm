@@ -138,15 +138,69 @@ public class KnapsackProblem {
 
         /**
          *
-         * for each item at index ‘i’ (0 <= i < items.length) and capacity ‘c’ (0 <= c <= capacity), we have two options:
+         * for each item at index 'i' (0 <= i < items.length) and capacity 'c' (0 <= c <= capacity), we have two options:
          *
-         * Exclude the item at index ‘i’. In this case, we will take whatever profit we get from the sub-array excluding
+         * Exclude the item at index 'i'. In this case, we will take whatever profit we get from the sub-array excluding
          * this item => dp[i-1][c]
-         * Include the item at index ‘i’ if its weight is not more than the capacity. In this case, we include its profit
+         * Include the item at index 'i' if its weight is not more than the capacity. In this case, we include its profit
          * plus whatever profit we get from the remaining capacity and from remaining
          * items => profits[i] + dp[i-1][c-weights[i]]
          *
          * dp[i][c] = max (dp[i-1][c], profits[i] + dp[i-1][c-weights[i]])
+         *
+         * Note:- Here we can use only first 'i' items
+         *
+         */
+        // process all sub-arrays for all the capacities
+        for (int i = 1; i < value.length + 1; i++) {
+            for (int j = 1; j < knapsack + 1; j++) {
+                // build solution sequentially.
+                // include the item, if it is not more than the capacity
+                if(weight[i - 1] <= j) {
+                    dp[i][j] = value[i - 1] + dp[i - 1][j - weight[i - 1]];
+                }
+                // take maximum
+                // exclude the item dp[i - 1][j]
+                dp[i][j] = Math.max(dp[i][j], dp[i - 1][j]);
+            }
+        }
+
+        printSelectedElements(dp, weight, value, knapsack);
+
+        // maximum profit will be at the bottom-right corner.
+        return dp[value.length][knapsack];
+    }
+
+    private static int findMaxValueTabulationSpaceOptimisation(int[] value, int[] weight, int knapsack) {
+
+        // basic checks
+        if (knapsack <= 0 || value.length == 0 || weight.length != value.length)
+            return 0;
+
+        // we can create array of 2 * knapsack
+        int dp[][] = new int[value.length+ 1][knapsack + 1];
+
+        for (int i = 0; i < value.length + 1; i++) {
+            dp[i][0] = 0;
+        }
+
+        for (int i = 0; i < knapsack + 1; i++) {
+            dp[0][i] = 0;
+        }
+
+        /**
+         *
+         * for each item at index 'i' (0 <= i < items.length) and capacity 'c' (0 <= c <= capacity), we have two options:
+         *
+         * Exclude the item at index 'i'. In this case, we will take whatever profit we get from the sub-array excluding
+         * this item => dp[i-1][c]
+         * Include the item at index 'i' if its weight is not more than the capacity. In this case, we include its profit
+         * plus whatever profit we get from the remaining capacity and from remaining
+         * items => profits[i] + dp[i-1][c-weights[i]]
+         *
+         * dp[i][c] = max (dp[i-1][c], profits[i] + dp[i-1][c-weights[i]])
+         *
+         * Note:- Here we can use only first 'i' items
          *
          */
         // process all sub-arrays for all the capacities
