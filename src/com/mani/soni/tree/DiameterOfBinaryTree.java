@@ -14,6 +14,10 @@ public class DiameterOfBinaryTree {
 
     private static int res = Integer.MIN_VALUE;
 
+    /**
+     * Efficient Solution:
+     * TC: O(n)
+     */
     private static int diameter(TreeNode<Integer> node) {
 
         if(node == null) {
@@ -23,8 +27,9 @@ public class DiameterOfBinaryTree {
         int left = diameter(node.left);
         int right = diameter(node.right);
 
+        // Storing this calculation as result
         res = Math.max(left + right + 1, res);
-
+        // Passing result in case this can't answer.
         return 1 + Math.max(left, right);
     }
 }
