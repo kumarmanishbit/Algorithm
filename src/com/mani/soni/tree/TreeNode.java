@@ -1,8 +1,8 @@
 package com.mani.soni.tree;
 
 public class TreeNode<T> {
-    TreeNode left;
-    TreeNode right;
+    TreeNode<T> left;
+    TreeNode<T> right;
     T value;
 
     TreeNode(T value) {
