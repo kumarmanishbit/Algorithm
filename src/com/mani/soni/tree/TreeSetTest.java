@@ -4,6 +4,7 @@ import java.util.TreeSet;
 
 public class TreeSetTest {
     public static void main(String[] args) {
+        // TreeSet is implemented using Red-Black Tree in Java
         TreeSet<Integer> treeSet = new TreeSet<>();
         treeSet.add(1);
         treeSet.add(20);

@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 public class TreeMapTest {
     public static void main(String[] args) {
+        // Tree Map are implemented using Red-Black Tree in Java
         TreeMap<Integer, String> treeMap = new TreeMap<>();
         treeMap.put(1, "A");
         treeMap.put(12, Character.toString('A' + 11));
