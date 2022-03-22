@@ -17,25 +17,41 @@ package com.mani.soni.dynamicprogramming;
 public class CoinChangeDP {
 
     public static void main(String[] args) {
-        int[] coins = {1,2,3};
-        int sum = 5;
+        int[] coins = {5, 10, 25, 100, 200};
+        int sum = 94;
 
-        System.out.println(noOfWays(coins, sum));
+        System.out.println(noOfWays(coins, sum, coins.length - 1));
+        System.out.println(canGetExactChange(sum, coins, coins.length - 1));
         System.out.println(findMaxNumberOfWays(coins, sum));
     }
 
-    private static int noOfWays(int[] coins, int sum) {
-        if(sum <= 0) {
+    static boolean canGetExactChange(int sum, int[] coins, int i) {
+        if(sum == 0) {
+            return true;
+        }
+
+        if(i < 0) {
+            return false;
+        }
+
+        if(i >= 0 && sum <= 0) {
+            return false;
+        }
+
+        return canGetExactChange(sum - coins[i], coins, i) || canGetExactChange(sum, coins, i - 1);
+    }
+
+    private static int noOfWays(int[] coins, int sum, int i) {
+        if(sum == 0) {
+            return 1;
+        }
+        if(i < 0) {
             return 0;
         }
-
-        int ways = 0;
-
-        for (int i = 0; i < coins.length; i++) {
-            ways += noOfWays(coins, sum - coins[i]);
+        if(i >= 0 && sum <= 0) {
+            return 0;
         }
-
-        return  ways;
+        return noOfWays(coins, sum - coins[i], i) + noOfWays(coins, sum, i - 1);
     }
 
     /**
