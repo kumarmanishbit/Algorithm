@@ -12,13 +12,13 @@ public class Practice {
     public static void main(String[] args) {
         sort2DArrayExample();
         doubleColonExample();
-        inttoIntegerConversion();
+        intToIntegerConversion();
         convertArrayToList();
         reverseArray();
         generateIntegerInRange();
     }
 
-    public static void inttoIntegerConversion() {
+    public static void intToIntegerConversion() {
         int[] arr = {1, 2, 3, 4};
 
         // :: double colon is method reference operator in Java
@@ -47,7 +47,6 @@ public class Practice {
          * Integer::new
          *
          */
-
         // Get the stream
         Stream<String> stream
                 = Stream.of("Geeks", "For",
@@ -76,8 +75,8 @@ public class Practice {
 
     public static void convertArrayToList() {
         int[] arr = { 1, 2, 3, 4, 5 };
-
         List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+//        Collectors.toSet()
     }
 
     public static void reverseArray() {
