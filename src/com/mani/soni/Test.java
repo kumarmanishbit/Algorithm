@@ -8,8 +8,59 @@ public class Test {
 
     public static void main(String[] args) {
 
-       // System.out.println(solution(new int[]{180, -50, -25, -25}, new String[]{"2020-01-01", "2020-01-01", "2020-01-01", "2020-01-31"}));
-        merge();
+        int[] arr = {3, 4, 1, 6, 2};
+
+        int[] count = new int[arr.length];
+
+        Queue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+
+        for (int i = 0; i < arr.length; i++) {
+            if(!pq.isEmpty() && pq.peek() < arr[i]) {
+                count[i] += pq.size();
+            }
+            count[i] += 1;
+            pq.add(arr[i]);
+        }
+        pq.clear();
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if(!pq.isEmpty() && pq.peek() < arr[i]) {
+                count[i] += pq.size();
+            }
+            pq.add(arr[i]);
+        }
+
+        for (int i = 0; i < count.length; i++) {
+            System.out.println(count[i]);
+        }
+//        System.out.println(rotationalCipher("Zebra-493", 3));
+    }
+
+    private static String rotationalCipher(String input, int rotationFactor) {
+        // Write your code here
+        StringBuilder string = new StringBuilder();
+
+        for(int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+
+            if(ch >= 'A' && ch <= 'Z') {
+                //ch - 'A'
+                string.append(Character.toString(('A' + (ch - 'A' + rotationFactor) % 26)));
+            } else if(ch >= 'a' && ch <= 'z') {
+                string.append(Character.toString(('a' + (ch - 'a' + rotationFactor) % 26)));
+            } else if(Character.isDigit(ch)) {
+                string.append((Integer.parseInt(String.valueOf(ch)) + rotationFactor) % 10);
+            } else {
+                string.append(ch);
+            }
+        }
+
+        return string.toString();
+    }
+
+    private static void swap(int[] arr , int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     public static void merge() {
