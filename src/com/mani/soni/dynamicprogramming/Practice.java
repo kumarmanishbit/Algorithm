@@ -1,18 +1,21 @@
 package com.mani.soni.dynamicprogramming;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Practice {
 
     public static void main(String[] args) {
-
         sort2DArrayExample();
         doubleColonExample();
         inttoIntegerConversion();
         convertArrayToList();
+        reverseArray();
+        generateIntegerInRange();
     }
 
     public static void inttoIntegerConversion() {
@@ -75,5 +78,20 @@ public class Practice {
         int[] arr = { 1, 2, 3, 4, 5 };
 
         List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+    }
+
+    public static void reverseArray() {
+        Integer[] arr = {1, 2, 3, 4, 5};
+        Collections.reverse(Arrays.asList(arr));
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]+ ", ");
+        }
+        System.out.println();
+    }
+
+    public static void generateIntegerInRange() {
+        int[] target = IntStream.rangeClosed(1, 10).toArray();
+        System.out.println(Arrays.toString(target));
     }
 }
