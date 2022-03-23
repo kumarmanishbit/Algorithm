@@ -10,12 +10,18 @@ import java.util.stream.Stream;
 public class Practice {
 
     public static void main(String[] args) {
-        sort2DArrayExample();
-        doubleColonExample();
-        intToIntegerConversion();
-        convertArrayToList();
-        reverseArray();
-        generateIntegerInRange();
+//        sort2DArrayExample();
+//        doubleColonExample();
+//        intToIntegerConversion();
+//        convertArrayToList();
+//        reverseArray();
+//        generateIntegerInRange();
+        binarySearch();
+    }
+
+    public static void binarySearch() {
+        int[] arr = {1, 10, 20};
+        System.out.println(Arrays.binarySearch(arr, 20));
     }
 
     public static void intToIntegerConversion() {
