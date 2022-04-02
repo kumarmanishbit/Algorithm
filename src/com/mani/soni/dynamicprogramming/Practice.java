@@ -1,8 +1,6 @@
 package com.mani.soni.dynamicprogramming;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -17,6 +15,7 @@ public class Practice {
 //        reverseArray();
 //        generateIntegerInRange();
         binarySearch();
+        Deque<Integer> deque = new ArrayDeque<>();
     }
 
     public static void binarySearch() {
